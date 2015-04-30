@@ -21,7 +21,7 @@ class FileHandler(tornado.web.RequestHandler):
         fh.write(movie_info['body'])
         self.finish({
             'status': 201,
-            'url': 'rtmp://192.168.1.78:1935/vod2/'+movie_info['filename']
+            'url': 'rtmp://192.168.1.78:1935/vod2/'+new_name
         })
 
     def delete(self, *args, **kwargs):
