@@ -13,15 +13,13 @@ class FileHandler(tornado.web.RequestHandler):
     def post(self):
         movie_info = self.request.files['movie'][0]
 
-        name = movie_info['filename'].replace(' ', '_')
-        name_without_extension, extension = os.path.splitext(name)
-        new_name = name_without_extension+"_"+str(uuid.uuid4())+extension
+        name = movie_info['filename']
 
-        fh = open(options.dir+new_name, "w")
+        fh = open(options.dir+name, "w")
         fh.write(movie_info['body'])
         self.set_status(201)
         self.finish({
-            'url': 'rtmp://192.168.1.78:1935/vod2/'+new_name
+            'url': 'rtmp://10.0.3.227:1935/vod2/'+name
         })
 
     def delete(self, *args, **kwargs):
